@@ -1,42 +1,63 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/**
+ * アプリケーション全体のレイアウトスタイル
+ *
+ * RDD §デザイン方針:
+ * - ボタンは画面上部に横並びで配置
+ * - Lottieアニメーション背景は画面いっぱいに表示
+ */
+
+/* ルートコンテナ: 画面全体を覆う */
+.app {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ヘッダー: 季節選択ボタンを上部に固定 */
+.app__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* LottieBackground用スタイル: 画面全体の背景として配置 */
+.lottie-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 
-.card {
-  padding: 2em;
+/* ローディング状態: 背景を暗くして読み込み中を示す */
+.lottie-background--loading {
+  background-color: #242424;
 }
 
-.read-the-docs {
+/* エラー状態: エラーメッセージを中央に表示 */
+.lottie-background--error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #242424;
   color: #888;
+}
+
+/* SeasonSelector用スタイル: ボタンを横並びに配置 */
+.season-selector {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* アクティブなボタン: 選択中の季節を視覚的に強調 */
+.season-selector__button--active {
+  border-color: #646cff;
+  background-color: #2a2a4a;
 }
