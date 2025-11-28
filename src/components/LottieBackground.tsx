@@ -7,6 +7,7 @@
  * @module components/LottieBackground
  */
 
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 import type { Season } from '../types/season';
@@ -33,7 +34,7 @@ interface LottieBackgroundProps {
  * @param props.season - 表示する季節
  * @returns Lottie背景コンポーネント
  */
-export const LottieBackground: React.FC<LottieBackgroundProps> = ({
+export const LottieBackground: FC<LottieBackgroundProps> = ({
   season,
 }) => {
   // アニメーションデータの状態管理
