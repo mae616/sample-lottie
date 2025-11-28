@@ -18,29 +18,17 @@
 - **言語/ランタイム**: TypeScript 5.9.3, Node.js
 - **フレームワーク**: React 19.2.0, Vite 7.2.4
 - **ライブラリ**: lottie-react
-- **パッケージマネージャー**: npm（またはpnpm）
+- **パッケージマネージャー**: pnpm
 
 ## 📦 セットアップ
 
 ### 1. 依存関係のインストール
 
 ```bash
-npm install
-```
-
-または
-
-```bash
 pnpm install
 ```
 
 ### 2. lottie-react のインストール
-
-```bash
-npm install lottie-react
-```
-
-または
 
 ```bash
 pnpm add lottie-react
@@ -69,12 +57,6 @@ mkdir -p public/lottie
 ### 開発サーバーの起動
 
 ```bash
-npm run dev
-```
-
-または
-
-```bash
 pnpm dev
 ```
 
@@ -83,22 +65,10 @@ pnpm dev
 ### ビルド
 
 ```bash
-npm run build
-```
-
-または
-
-```bash
 pnpm build
 ```
 
 ### プレビュー
-
-```bash
-npm run preview
-```
-
-または
 
 ```bash
 pnpm preview
