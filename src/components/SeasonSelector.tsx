@@ -7,7 +7,7 @@
  * @module components/SeasonSelector
  */
 
-import type { FC } from 'react';
+import React from 'react';
 import type { Season } from '../types/season';
 import { SEASONS, SEASON_LABELS } from '../types/season';
 
@@ -39,7 +39,7 @@ interface SeasonSelectorProps {
  * @param props.onSeasonChange - 季節変更時のコールバック関数
  * @returns 季節選択ボタン群
  */
-export const SeasonSelector: FC<SeasonSelectorProps> = ({
+export const SeasonSelector: React.FC<SeasonSelectorProps> = ({
   currentSeason,
   onSeasonChange,
 }) => {

@@ -7,8 +7,7 @@
  * @module components/LottieBackground
  */
 
-import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 import type { Season } from '../types/season';
 import { SEASON_LOTTIE_PATHS } from '../types/season';
@@ -34,7 +33,7 @@ interface LottieBackgroundProps {
  * @param props.season - 表示する季節
  * @returns Lottie背景コンポーネント
  */
-export const LottieBackground: FC<LottieBackgroundProps> = ({
+export const LottieBackground: React.FC<LottieBackgroundProps> = ({
   season,
 }) => {
   // アニメーションデータの状態管理
@@ -52,13 +51,14 @@ export const LottieBackground: FC<LottieBackgroundProps> = ({
      * Viteではpublic/内のファイルはfetchで取得する必要がある
      * import()はsrc/内のファイルに対して使用
      */
+    const controller = new AbortController();
     const loadAnimation = async () => {
       setIsLoading(true);
       setError(null);
 
       try {
         const path = SEASON_LOTTIE_PATHS[season];
-        const response = await fetch(path);
+        const response = await fetch(path, { signal: controller.signal });
 
         if (!response.ok) {
           throw new Error(`Failed to load animation: ${response.status}`);
@@ -67,17 +67,26 @@ export const LottieBackground: FC<LottieBackgroundProps> = ({
         const data: unknown = await response.json();
         setAnimationData(data);
       } catch (err) {
+        if (controller.signal.aborted) {
+          return;
+        }
         // RDD §非機能要件: エラー時はコンソールに出力
         console.error('Lottieアニメーション読み込みエラー:', err);
         setError(
           err instanceof Error ? err.message : '読み込みに失敗しました'
         );
       } finally {
-        setIsLoading(false);
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
       }
     };
 
     void loadAnimation();
+
+    return () => {
+      controller.abort();
+    };
   }, [season]);
 
   // エラー時の表示（RDD §非機能要件: ユーザーには簡易的なエラー表示）
