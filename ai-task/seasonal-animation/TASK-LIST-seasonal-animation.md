@@ -2,7 +2,7 @@
 
 **作成日**: 2025-01-27
 **RDD参照**: `doc/rdd.md`
-**ステータス**: Sprint 1 TASK生成完了
+**ステータス**: Sprint 2 TASK生成完了
 
 ---
 
@@ -11,7 +11,7 @@
 | スプリント | ステータス | TASKファイル | 更新日 |
 |-----------|-----------|-------------|--------|
 | Sprint 1 | ✅ TASK生成完了 | `TASK_sprint1_seasonal-animation.md` | 2025-01-28 |
-| Sprint 2 | 未着手 | - | - |
+| Sprint 2 | ✅ TASK生成完了 | `TASK_sprint2_seasonal-animation.md` | 2025-01-29 |
 | Sprint 3 | 未着手 | - | - |
 
 ---
