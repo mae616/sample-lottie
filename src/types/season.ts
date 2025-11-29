@@ -42,8 +42,30 @@ export const SEASON_LABELS: Record<Season, string> = {
 } as const;
 
 /**
- * 季節ごとのLottieファイルパスマップ
+ * 季節ごとのLottieファイルパスを取得
  *
+ * import.meta.env.BASE_URLを使用してデプロイ環境に応じたパスを動的に構築
+ * ローカル開発時は '/'、GitHub Pages時は '/sample-lottie/' がベースになる
+ *
+ * @param season - 取得する季節
+ * @returns Lottieファイルへのパス（ベースURL付き）
+ *
+ * @example
+ * ```ts
+ * const path = getSeasonLottiePath('spring');
+ * // ローカル: '/lottie/spring.json'
+ * // GitHub Pages: '/sample-lottie/lottie/spring.json'
+ * ```
+ */
+export const getSeasonLottiePath = (season: Season): string => {
+  // import.meta.env.BASE_URLは末尾スラッシュ付き（例: '/sample-lottie/'）
+  return `${import.meta.env.BASE_URL}lottie/${season}.json`;
+};
+
+/**
+ * 季節ごとのLottieファイルパスマップ（参照用）
+ *
+ * @deprecated getSeasonLottiePath() を使用してください
  * publicディレクトリからの相対パス
  * RDD §制約に基づき、命名規則に従う
  */

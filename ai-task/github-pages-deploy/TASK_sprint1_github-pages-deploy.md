@@ -381,3 +381,52 @@ TASK-1.5 (動作確認) ← TASK-1.4に依存
 - GitHub Actions v4系の安定したアクションを使用
 - `import.meta.env.BASE_URL`による動的パス構築で環境差異を吸収
 - -1点の理由: リポジトリ設定（TASK-1.4）は手動作業のため、権限問題が発生する可能性がある
+
+---
+
+## 進捗状況
+
+### 実行日: 2025-01-30
+
+#### TASK-1.1: Vite設定の更新 ✅ 完了
+- `vite.config.ts` に `base: '/sample-lottie/'` を追加
+- ビルド後のアセットパスが `/sample-lottie/` で始まることを確認
+
+#### TASK-1.2: Lottieファイルパスの修正 ✅ 完了
+- `src/types/season.ts` に `getSeasonLottiePath()` 関数を追加
+- `src/components/LottieBackground.tsx` で新関数を使用するよう修正
+- `import.meta.env.BASE_URL` により環境に応じたパスを動的構築
+
+#### TASK-1.3: GitHub Actionsワークフロー作成 ✅ 完了
+- `.github/workflows/deploy.yml` を新規作成
+- pnpm 10 / Node.js 22 / actions v4系を使用
+
+#### TASK-1.4: リポジトリのGitHub Pages設定 ⏳ 手動作業待ち
+- ユーザーがGitHubリポジトリ設定で「Source: GitHub Actions」を選択する必要あり
+
+#### TASK-1.5: デプロイ後の動作確認 ⏳ TASK-1.4完了後
+
+### 検証結果
+- `pnpm lint --fix`: ✅ PASS
+- `pnpm build`: ✅ PASS
+- `pnpm preview`: ✅ PASS（URL: http://localhost:4173/sample-lottie/）
+- dist/index.html アセットパス確認: ✅ `/sample-lottie/` で始まる
+
+---
+
+## 完了報告
+
+# TASK結果: Sprint 1 - GitHub Pages デプロイ設定
+- 実行スプリント: Sprint 1
+- RDD整合: OK（根拠: doc/rdd.md §技術スタック Vite 7.2.4）
+- 変更要求: 有（ADR-lite承認済み 2025-01-30）
+- 検証結果: lint/build すべてPASS
+- 差分要約:
+  1. `vite.config.ts`: base オプション追加
+  2. `src/types/season.ts`: getSeasonLottiePath() 関数追加
+  3. `src/components/LottieBackground.tsx`: 新関数使用に変更
+  4. `.github/workflows/deploy.yml`: 新規作成
+- 次の一手:
+  1. TASK-1.4: GitHubリポジトリでPages設定（手動）
+  2. TASK-1.5: デプロイ後の動作確認
+  3. mainブランチへのマージ後、GitHub Actionsの実行確認

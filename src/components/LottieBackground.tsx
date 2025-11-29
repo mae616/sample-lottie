@@ -10,7 +10,7 @@
 import React, { useEffect, useState } from 'react';
 import Lottie from 'lottie-react';
 import type { Season } from '../types/season';
-import { SEASON_LOTTIE_PATHS } from '../types/season';
+import { getSeasonLottiePath } from '../types/season';
 
 /**
  * LottieBackgroundコンポーネントのProps
@@ -57,7 +57,10 @@ export const LottieBackground: React.FC<LottieBackgroundProps> = ({
       setError(null);
 
       try {
-        const path = SEASON_LOTTIE_PATHS[season];
+        // getSeasonLottiePath()でデプロイ環境に応じたパスを取得
+        // ローカル: '/lottie/spring.json'
+        // GitHub Pages: '/sample-lottie/lottie/spring.json'
+        const path = getSeasonLottiePath(season);
         const response = await fetch(path, { signal: controller.signal });
 
         if (!response.ok) {
